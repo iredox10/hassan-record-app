@@ -55,4 +55,35 @@ export const sale = async (req,res,next) =>{
     }
 }
 
+export const payment = async (req,res,next) =>{
+    try {
+        // const pos = await Transaction.findBy({payment:"POS"})
+        // const cash = await Transaction.findBy({payment:"CASH"})
+        // const transfer = await Transaction.findBy({payment:"TRANSFER"})
+        const payment = await Transaction.aggregate([
+            {$group:{
+                "_id": "$payment",
+                "count": {"$sum": 1}
+            }}
+        ])
+        res.json(payment)
+    } catch (err) {
+      next(err)  
+    }
+}
+
+
+export const monthStats = async (req,res,next) =>{
+    try {
+        const date = new Date()
+        const lastMonth = new Date(date.getMonth() -1)
+        const stats = await Transaction.aggregate([
+            {"$match": lastMonth},
+            {"$project": {"$productName":1}}
+        ])
+    } catch (err) {
+        next(err)
+    }
+
+}
 

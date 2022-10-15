@@ -13,4 +13,8 @@ route.get('/view-product/:id', controller.view_product)
 route.get('/test', controller.test)
 
 route.post('/sale', controller.sale)
+
+route.get('/payment', controller.payment)
+
+route.get('/last-month-stats', controller.monthStats)
 export default route

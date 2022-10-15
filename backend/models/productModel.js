@@ -20,12 +20,12 @@ const product = new mongoose.Schema({
     date:{
         default: Date
     },
-    // transactions: [{
-    //         type: mongoose.Types.ObjectId,
-    //         ref: 'Transaction'
-    // }]
-    transactions:Array
+    transactions: [{
+            type: mongoose.Types.ObjectId,
+            ref: 'Transaction'
+    }]
+    // transactions:Array
 
-})
+},{timestamp:true})
 
 export const Product = mongoose.model('Product', product)
