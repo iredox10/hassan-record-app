@@ -25,7 +25,6 @@ const transaction = new mongoose.Schema(
         toUpperCase: true
     }
   },
-  { timestamp: true }
-);
+  { timestamps:true});
 
 export const Transaction = mongoose.model('Transaction', transaction)

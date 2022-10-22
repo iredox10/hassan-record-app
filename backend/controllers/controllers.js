@@ -45,13 +45,32 @@ export const sale = async (req,res,next) =>{
             let tq = t.quantity
             const tName = t.productName
             const p = Product.updateMany({productName:tName},{
-                $inc:{pieces: - tq},$push:{transaction: tr}
+                $inc:{pieces: - tq},$push:{transactions: tr}
             })
-            .then(r => res.json(r))
+            .then(r => res.json())
             .catch(err => console.log(err))
         })
+        res.json(transaction)
     }catch(err){
        next(err)
+    }
+}
+
+
+export const transactions = async (req,res,next) =>{
+    try{
+        const transc = await Transaction.find()
+        res.json(transc)
+    }catch(err){
+        res.json(err)
+    }
+}
+export const transaction = async (req,res,next) =>{
+    try{
+        const transc = await Transaction.findById(req.params.id)
+        res.json(transc)
+    }catch(err){
+        res.json(err)
     }
 }
 
@@ -76,14 +95,45 @@ export const payment = async (req,res,next) =>{
 export const monthStats = async (req,res,next) =>{
     try {
         const date = new Date()
-        const lastMonth = new Date(date.getMonth() -1)
+        const lastMonth = date.getDay(date.getDay())
         const stats = await Transaction.aggregate([
-            {"$match": lastMonth},
-            {"$project": {"$productName":1}}
+            {"$match": {"createdAt":lastMonth}},
+            // {"$project": {"$productName":1}}
         ])
+        res.json(stats)
     } catch (err) {
         next(err)
     }
 
 }
+
+export const yesterdayStats = async (req,res,next) =>{
+    try {
+        const date = new Date()
+        const yesterday = new Date(date.setDate(date.getDate() -1))
+        const stats = await Transaction.aggregate([
+            {"$match": {"createdAt":yesterday}},
+            // {"$project": {"$productName":1}}
+        ])
+        res.json(stats)
+    } catch (err) {
+        next(err)
+    }
+
+}
+
+export const todayStats = async (req,res,next) =>{
+    try {
+        const date = new Date()
+        const today = new Date(date.setDate(date.getDate()))
+        const stats = await Transaction.aggregate([
+            {'$match':{'createdAt':{'$lte': today}}}
+        ])
+        res.json(stats)
+    } catch (err) {
+        next(err)
+    }
+
+}
+
 

@@ -14,7 +14,11 @@ route.get('/test', controller.test)
 
 route.post('/sale', controller.sale)
 
-route.get('/payment', controller.payment)
+route.get('/transactions', controller.transactions)
+
+route.get('/payment-method', controller.payment)
 
 route.get('/last-month-stats', controller.monthStats)
+
+route.get('/today-stats', controller.todayStats)
 export default route

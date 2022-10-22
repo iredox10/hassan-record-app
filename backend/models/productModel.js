@@ -17,15 +17,12 @@ const product = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    date:{
-        default: Date
-    },
-    transactions: [{
-            type: mongoose.Types.ObjectId,
-            ref: 'Transaction'
-    }]
-    // transactions:Array
+    // transactions: [{
+    //         type: mongoose.Types.ObjectId,
+    //         ref: 'Transaction'
+    // }]
+    transactions:Array
 
-},{timestamp:true})
+},{timestamps:true})
 
 export const Product = mongoose.model('Product', product)
