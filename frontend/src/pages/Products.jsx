@@ -69,7 +69,6 @@ export default function Products() {
         >
           <h1 className="font-bold">Add Product</h1>
           <div className="flex flex-col w-full">
-            {productName}
             <Input
               label="productName"
               labelText={"productName"}
