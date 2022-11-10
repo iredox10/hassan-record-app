@@ -1,6 +1,7 @@
 import express from 'express'
 import mongoConnection from './utils/mongoConnection.js'
 import routes from './routes/routes.js'
+import userRoutes from './routes/userRoute.js'
 import cors from 'cors'
 const app = express()
 
@@ -13,6 +14,7 @@ mongoConnection()
 
 // custom middlewares
 app.use(routes)
+app.use(userRoutes)
 
 app.use((req,res,err) =>{
     res.json(err)
