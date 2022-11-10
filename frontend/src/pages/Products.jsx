@@ -35,10 +35,9 @@ export default function Products() {
 
   return (
     <>
-      <Header />
       <div className="md:grid grid-cols-6 gap-5 p-5">
         <div className="md:flex flex-wrap gap-5 col-span-4 col-span-end-4">
-          {products.map((p) => (
+          {products && products.map((p) => (
             <div key={p._id} className='shadow-lg p-4 '>
               <p>
                 <span className="font-bold capitalize">product name: </span>
@@ -56,9 +55,14 @@ export default function Products() {
                 <span className="font-bold capitalize">amount: </span>{" "}
                 {p.amount}
               </p>
+              <div className="flex gap-2">
+              <Link to={`/product/${p._id}`}>
+                <Button text="manage product" />
+              </Link>
               <Link to={`/transactions/${p._id}`}>
                 <Button text="view transactions" />
               </Link>
+              </div>
             </div>
           ))}
         </div>

@@ -10,6 +10,8 @@ route.get('/view-products', controller.view_products)
 
 route.get('/view-product/:id', controller.view_product)
 
+route.delete('/delete-product/:id', controller.delete_product)
+
 route.get('/test', controller.test)
 
 route.post('/sale', controller.sale)

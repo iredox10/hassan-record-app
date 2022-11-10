@@ -1,11 +1,18 @@
 import {Link} from 'react-router-dom'
-
+import logo from '../assets/logo.jpg'
 export default function Header() {
   return (
-    <div className="text-center bg-black text-white md:p-5 mb-5">
+    <div className="text-center bg-[red] flex items-center p-4 md:p-10 shadow-md mb-5 ">
+      <div className='radius-lg'>
       <Link to='/'>
-        <h1 className="font-extrabold capitalize">hassan record</h1>
+        <img src={logo} alt="logo" className='w-[5%]' />
       </Link>
+      </div>
+      <div>
+        <Link to='#'>
+          home
+        </Link>
+      </div>
     </div>
   );
 }

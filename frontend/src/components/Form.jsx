@@ -15,13 +15,13 @@ export default function Form({products, setProductName,setQuantity,setAmount,set
               name="productName"
               id="productName"
               onChange={(e) => setProductName(e.target.value)}
-              className="border-2 border-black"
+              className="border-2 border-black capitalize p-2"
             >
               <option disabled selected>
                 select product
               </option>
-              {products.map((p) => (
-                <option value={p.productName}>{p.productName}</option>
+              {products && products.map((p) => (
+               p.pieces >0 ? <option value={p.productName}>{p.productName}</option> : <option disabled className='text-red-300'>{p.productName} is empty</option>
               ))}
             </select>
           </div>

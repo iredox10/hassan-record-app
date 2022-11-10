@@ -20,7 +20,7 @@ export default function Sale() {
   const [quantity, setQuantity] = useState(null)
   const [amount, setAmount] = useState(null)
   const [payment, setPayment] = useState(null)
-  const [prints, setPrints] = useState([])
+  const [prints, setPrints] = useState()
   const [error,setError] = useState('')
 
   const AddToArray = (e) =>{
@@ -50,24 +50,16 @@ export default function Sale() {
 
   return (
     <div className="relative">
-      <Header />
       {print.length > 0 ? (
         <Print prints={prints} />
       ) : (
         <div>
           <div className="flex justify-between items-center w-[80%] p-5">
             <HeadText text="select product to sale" />
-            <Input
-              label="search"
-              labelText="search product"
-              type="search"
-              name="search"
-              id="search"
-            />
           </div>
           {error && <div className="text-red-600">{error} </div>}
           <div className="flex max-h-max gap-5 p-5">
-            <div className="flex-1 border-r-4">
+            <div className="flex-1 pr-4 border-r-4 border-gray-500">
               <Form
                 products={products}
                 setProductName={setProductName}
@@ -77,9 +69,9 @@ export default function Sale() {
                 AddToArray={AddToArray}
               />
             </div>
-            <div className="flex flex-wrap gap-5">
-              <form onSubmit={handleSubmit}>
-                {selectedProducts.length <= 0 ? (
+            <div className="flex  flex-wrap gap-5">
+              <form onSubmit={handleSubmit} className='flex flex-wrap gap-6 max-w-[70%]'>
+                {selectedProducts && selectedProducts.length <= 0 ? (
                   <div>no product selected to sale</div>
                 ) : (
                   selectedProducts.map((sp, i) => (
@@ -88,11 +80,12 @@ export default function Sale() {
                       <PTag span="quantity" text={sp.quantity} />
                       <PTag span="amount" text={sp.amount} />
                       <PTag span="payment" text={sp.payment} />
+                      <button className="p-4 bg-red-600 capitalize text-white">remove</button>
                     </div>
                   ))
                 )}
-                {selectedProducts.length > 0 ? <Button text="sale" /> : ""}
               </form>
+                {selectedProducts.length > 0 ? <Button text="sale" /> : ""}
             </div>
           </div>
         </div>
