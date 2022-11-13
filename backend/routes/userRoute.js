@@ -11,6 +11,6 @@ route.patch('/update-user', userController.update_user)
 
 route.delete('/delete-user', userController.delete_user)
 
-
+route.get('/get-users', userController.users)
 
 export default route

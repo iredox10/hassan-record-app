@@ -18,12 +18,12 @@ const product = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    // transactions: [{
-    //         type: mongoose.Types.ObjectId,
-    //         ref: 'Transaction'
-    // }]
     transactions:Array
 
 },{timestamps:true})
-
+product.pre('save', function(){
+    if(this.pieces == 0){
+        this.pieces = 0
+    }
+})
 export const Product = mongoose.model('Product', product)

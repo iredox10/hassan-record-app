@@ -8,11 +8,15 @@ const singJwt = (id,admin) =>{
 
 export const add_user = async(req,res,next) =>{
     try {
-        const user = await User.create(req.body)
-        const jwt = singJwt(user._id,user.isAdmin)
-        res.status(201).json(user)
+            const newUser = await User.create(req.body)
+            res.status(201).json({newUser})
     } catch (err) {
-        res.status(500).json(err)
+        if(err.code){
+        err.message = 'user alredy existed'
+            res.status(500).json({err:err.message})
+        }else{
+        res.status(500).json({err:err.message})
+        }
     }
 }
 
@@ -31,9 +35,9 @@ export const login = async(req,res,next) =>{
             throw Error('password did not match')
         }
         const jwt = singJwt(user._id,user.isAdmin)
-        res.json({user,jwt})
+        res.status(200).json({user,jwt})
     }catch(err){
-        res.json({err: err.message})
+        res.status(404).json({err: err.message})
     }
 }
 
@@ -52,5 +56,14 @@ export const update_user = async(req,res,next) =>{
         res.status(201).json(user)
     } catch (err) {
         res.status(500).json(err)
+    }
+}
+
+export const users = async (req,res,next) =>{
+    try{
+        const users = await User.find()
+        res.status(200).json(users)
+    }catch(err){
+        res.json(err)
     }
 }

@@ -8,7 +8,8 @@ const user = new mongoose.Schema({
     },
     password:{
         type: String,
-        required: true
+        required: true,
+        min: [6,'password must be at least six character']
     },
     isAdmin:{
         type: Boolean,
