@@ -11,7 +11,7 @@ export default function Input({label,labelText,type,name,id,placeholder,state,va
         placeholder={placeholder}
         onChange={state}
         value={value}
-        className="p-2 mt-2 w-full border-2 border-black capitalize"
+        className="p-2 mt-2 w-full border-2 border-red-600 capitalize"
       />
     </div>
   );

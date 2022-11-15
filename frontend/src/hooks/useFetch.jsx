@@ -1,7 +1,7 @@
 import { useState,useEffect } from "react"
 import axios from 'axios'
 
-const useFectch = (url) =>{
+const useFetch = (url) =>{
 
     const [data, setData] = useState()
     const [err, setErr] = useState()
@@ -10,7 +10,7 @@ const useFectch = (url) =>{
             try{
                 const res = await axios(url)
                 setData(res.data)
-                console.log(res.data)
+                // console.log(res.data)
             }catch(err){
                 setErr(err)
                 console.log(err)
@@ -21,4 +21,4 @@ const useFectch = (url) =>{
     return {data,err}
 }
 
-export default useFectch
+export default useFetch

@@ -2,7 +2,7 @@ import React from 'react'
 import Button from './Button';
 import Input from './Input';
 
-export default function Form({products, setProductName,setQuantity,setAmount,setPayment,AddToArray}) {
+export default function Form({products, setProductName,setQuantity,setAmount,setPayment,setEmployer,employer,AddToArray}) {
   return (
     <div>
       <form>
@@ -15,7 +15,7 @@ export default function Form({products, setProductName,setQuantity,setAmount,set
               name="productName"
               id="productName"
               onChange={(e) => setProductName(e.target.value)}
-              className="border-2 border-black capitalize p-2"
+              className="border-2 border-red-600 capitalize p-2"
             >
               <option disabled selected>
                 select product
@@ -25,6 +25,7 @@ export default function Form({products, setProductName,setQuantity,setAmount,set
               ))}
             </select>
           </div>
+
           <Input
             label="quantity"
             labelText="quantity"
@@ -45,7 +46,7 @@ export default function Form({products, setProductName,setQuantity,setAmount,set
               name="productName"
               id="productName"
               onChange={(e) => setPayment(e.target.value)}
-              className="border-2 border-black"
+              className="border-2 border-red-600"
             >
               <option disabled selected>
                 select payment method
@@ -54,6 +55,7 @@ export default function Form({products, setProductName,setQuantity,setAmount,set
               <option value="POS">P.O.S</option>
               <option value="TRANSFER">TRANSFER</option>
             </select>
+          <input type="text" name="employer" id="employer" value={employer} onChange={(e=>{setEmployer(e.target.value)})} className=''  />
           </div>
           <Button text="add" action={AddToArray} />
         </div>

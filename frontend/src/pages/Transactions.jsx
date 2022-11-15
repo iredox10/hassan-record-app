@@ -25,6 +25,7 @@ export default function Products() {
 
   return (
     <>
+    <Header />
       <div className='flex'>
         {transactions.length <= 0 ? (
           <div className="text-center p-4 capitalize font-extrabold text-3xl">

@@ -1,9 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Button from '../components/Button'
+import Header from '../components/Header'
 
 export default function Stats() {
   return (
+    <>
+    <Header />
     <div className='flex gap-2 justify-center'>
         <Link to='last-month-stats'>
         <Button text="last month" />
@@ -18,5 +21,6 @@ export default function Stats() {
         <Button text="payment stats" />
         </Link>
     </div>
+    </>
   )
 }

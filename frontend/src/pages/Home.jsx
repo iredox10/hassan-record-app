@@ -1,24 +1,18 @@
-import React from "react";
-import Button from "../components/Button";
-import Header from "../components/Header";
-import useFectch from "../hooks/useFetch";
-import {Link} from 'react-router-dom'
-
+import React from 'react'
+import Login from './Login'
+import logo from '../assets/logo.jpg'
 export default function Home() {
-  const { data, err } = useFectch("http://localhost:4000/view-products");
   return (
-    <>
-      <div className='p-5 flex gap-4'>
-        <Link to="/products">
-          <Button text="products page" />
-        </Link>
-        <Link to="/sale">
-          <Button text="sale page" />
-        </Link>
-        <Link to="/stats">
-          <Button text="stats" />
-        </Link>
-      </div>
-    </>
-  );
+    <div className='flex gap-5'>
+      <div className='bg-red-500 p-5 w-[60vw] h-[100vh]'>
+        <h1 className='text-white text-center p-40 uppercase font-bold text-5xl text-center'>welcome to alin dabaga investment (ADI)</h1>
+        </div>
+        <div className='w-[50%] p-40'>
+        <Login />
+        </div>
+        <div className='absolute w-[7%] border-2 border-red-500  top-2 left-[50%]'>
+          <img src={logo} alt="" className='w-full' />
+        </div>
+    </div>
+  )
 }

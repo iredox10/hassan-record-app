@@ -35,6 +35,7 @@ export default function Products() {
 
   return (
     <>
+    <Header />
       <div className="md:grid grid-cols-6 gap-5 p-5">
         <div className="md:flex flex-wrap gap-5 col-span-4 col-span-end-4">
           {products && products.map((p) => (

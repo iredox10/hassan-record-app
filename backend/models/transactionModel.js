@@ -23,6 +23,10 @@ const transaction = new mongoose.Schema(
         type: String,
         required: true,
         toUpperCase: true
+    },
+    employer:{
+      type: String,
+      required: true,
     }
   },
   { timestamps:true});

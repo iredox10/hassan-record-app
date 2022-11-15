@@ -2,6 +2,7 @@ import axios from "axios"
 import { useState } from "react"
 import { useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
+import Header from "../components/Header"
 import PTag from "../components/PTag"
 import useFectch from "../hooks/useFetch"
 export default function Product() {
@@ -27,6 +28,8 @@ export default function Product() {
       }
     }
   return (
+    <>
+    <Header />
     <div className="p-5 shadow">
       <div>
         {err}
@@ -55,5 +58,6 @@ export default function Product() {
       </div>
     }
     </div>
+    </>
   )
 }
