@@ -17,7 +17,7 @@ export default function Products() {
   const [quantity, setQuantity] = useState("");
   const [pieces, setPieces] = useState("");
   const [amount, setAmount] = useState("");
-
+  const [successfulMessage, setSuccessfulMessage] = useState(false)
   const handlesubmit = async (e) => {
     e.preventDefault();
     try {
@@ -27,7 +27,15 @@ export default function Products() {
         pieces,
         amount,
       });
-      console.log(res.data);
+      setProductName('')
+      setAmount('')
+      setPieces('')
+      setQuantity('')
+      setSuccessfulMessage(true)
+      const int = setTimeout(() => {
+        setSuccessfulMessage(false)
+      }, 1000);
+      clearInterval(int)
     } catch (err) {
       console.log(err);
     }
@@ -72,6 +80,7 @@ export default function Products() {
           onSubmit={handlesubmit}
           className="col-span-start-4 col-span-end-5 "
         >
+          {successfulMessage && <div>added successfully</div>}
           <h1 className="font-bold">Add Product</h1>
           <div className="flex flex-col w-full">
             <Input
@@ -81,6 +90,7 @@ export default function Products() {
               name="productName"
               id="productName"
               placeholder=""
+              value={productName}
               state={(e) => setProductName(e.target.value)}
             />
             <Input
@@ -90,6 +100,7 @@ export default function Products() {
               name="quantity"
               id="quantity"
               placeholder=""
+              value={quantity}
               state={(e) => setQuantity(e.target.value)}
             />
             <Input
@@ -99,6 +110,7 @@ export default function Products() {
               name="pieces"
               id="pieces"
               placeholder=""
+              value={pieces}
               state={(e) => setPieces(e.target.value)}
             />
             <Input
@@ -108,6 +120,7 @@ export default function Products() {
               name="amount"
               id="amount"
               placeholder=""
+              value={amount}
               state={(e) => setAmount(e.target.value)}
             />
             <Button text="add product" />

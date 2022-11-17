@@ -2,10 +2,11 @@ import React from 'react'
 import Button from './Button';
 import Input from './Input';
 
-export default function Form({products, setProductName,setQuantity,setAmount,setPayment,setEmployer,employer,AddToArray}) {
+export default function Form({products, setProductName,setQuantity,setAmount,setPayment,setEmployer,user,AddToArray}) {
   return (
     <div>
       <form>
+        {setEmployer(user)}
         <div className="gap-5 flex-1">
           <div className="flex flex-col mb-3">
             <label htmlFor="productName" className="font-bold capitalize">
@@ -55,7 +56,6 @@ export default function Form({products, setProductName,setQuantity,setAmount,set
               <option value="POS">P.O.S</option>
               <option value="TRANSFER">TRANSFER</option>
             </select>
-          <input type="text" name="employer" id="employer" value={employer} onChange={(e=>{setEmployer(e.target.value)})} className=''  />
           </div>
           <Button text="add" action={AddToArray} />
         </div>

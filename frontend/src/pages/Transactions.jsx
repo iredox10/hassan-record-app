@@ -26,18 +26,19 @@ export default function Products() {
   return (
     <>
     <Header />
-      <div className='flex'>
+      <div className='flex gap-10 flex-wrap p-5'>
         {transactions.length <= 0 ? (
           <div className="text-center p-4 capitalize font-extrabold text-3xl">
             no transaction yet
           </div>
-        ) : (
+        ) :(
           transactions.map((t) => (
-            <div key={t._id} className="shadow-lg p-4">
+            <div key={t._id} className="shadow-lg p-4 border-2 rounded-lg bg-gray-200 border-red-500">
               <PTag span="product name" text={t.productName} />
               <PTag span="quantity" text={t.quantity} />
               <PTag span="amount" text={t.amount} />
               <PTag span="payment method" text={t.payment} />
+              <PTag span="employer" text={t.employer} />
               <PTag span="date" text={t.createdAt} />
             </div>
           ))

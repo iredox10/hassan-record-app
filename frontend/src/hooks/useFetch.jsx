@@ -17,7 +17,7 @@ const useFetch = (url) =>{
             }
         }
         fetch()
-    },[url])
+    },[url,data])
     return {data,err}
 }
 

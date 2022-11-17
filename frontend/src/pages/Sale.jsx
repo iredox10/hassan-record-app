@@ -28,8 +28,8 @@ export default function Sale() {
 
   const AddToArray = (e) =>{
     e.preventDefault()
-    if(productName == null ) {
-      setError('please add product name')
+    if(productName == null || quantity == null || amount == null || payment == null ) {
+      setError('please fill all the field')
       return
     }else{
       setSelectedProducts((p) => [...p, {productName,quantity,amount,payment,employer}])
@@ -43,7 +43,7 @@ export default function Sale() {
       try{
           const res = await axios.post("http://localhost:4000/sale",selectedProducts);
           console.log(res.data)
-          navigate('/print', {data: data})
+          navigate('/print', {state:{transactions: res.data, user: user.username}})
       }catch(err){
         console.log(err)
       }
@@ -67,7 +67,7 @@ export default function Sale() {
                 setQuantity={setQuantity}
                 setAmount={setAmount}
                 setPayment={setPayment}
-                employer = {user.username}
+                user = {user.username}
                 setEmployer={setEmployer}
                 AddToArray={AddToArray}
               />
