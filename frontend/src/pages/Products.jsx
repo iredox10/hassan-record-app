@@ -32,10 +32,9 @@ export default function Products() {
       setPieces('')
       setQuantity('')
       setSuccessfulMessage(true)
-      const int = setTimeout(() => {
+      setTimeout(() => {
         setSuccessfulMessage(false)
       }, 1000);
-      clearInterval(int)
     } catch (err) {
       console.log(err);
     }

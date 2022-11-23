@@ -1,11 +1,9 @@
 import axios from "axios";
-import React, { useEffect, useReducer, useState } from "react";
+import React, {useState } from "react";
 import {useLocation, useNavigate} from 'react-router-dom'
-import Button from "../components/Button";
 import Form from "../components/Form";
 import Header from "../components/Header";
 import HeadText from "../components/HeadText";
-import Input from "../components/Input";
 import PTag from "../components/PTag";
 import useFetch from "../hooks/useFetch";
 
@@ -25,6 +23,7 @@ export default function Sale() {
   const [payment, setPayment] = useState(null)
   const [employer, setEmployer] = useState('')
   const [error,setError] = useState('')
+  const [remove, setRemove] = useState(false)
 
   const AddToArray = (e) =>{
     e.preventDefault()
@@ -49,6 +48,11 @@ export default function Sale() {
       }
   }
 
+  const handleRemove = (e) =>{
+    e.preventDefault()
+    const p = selectedProducts.filter()
+    console.log(e)
+  }
 
   return (
     <div>
@@ -76,15 +80,14 @@ export default function Sale() {
               <form onSubmit={handleSubmit} className='flex  flex-wrap gap-6 '>
                 <div className="flex flex-wrap gap-5  ">
                 {selectedProducts && selectedProducts.length <= 0 ? (
-                  <div>no product selected to sale</div>
-                ) : (
-                  selectedProducts.map((sp, i) => (
+                  <div className="capitalize flex font-bold">no product to sale</div>
+                ) :(selectedProducts.map((sp, i) => (
                     <div key={i} className="shadow-md p-3">
                       <PTag span="product name" text={sp.productName} />
                       <PTag span="quantity" text={sp.quantity} />
                       <PTag span="amount" text={sp.amount} />
                       <PTag span="payment" text={sp.payment} />
-                      <button className="p-3 mt-2  bg-red-600 capitalize text-white">remove</button>
+                      <button className="p-3 mt-2  bg-red-600 capitalize text-white" onClick={handleRemove}>remove</button>
                     </div>
                   ))
                 )}

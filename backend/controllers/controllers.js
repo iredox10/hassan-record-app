@@ -85,9 +85,6 @@ export const transaction = async (req,res,next) =>{
 
 export const payment = async (req,res,next) =>{
     try {
-        // const pos = await Transaction.findBy({payment:"POS"})
-        // const cash = await Transaction.findBy({payment:"CASH"})
-        // const transfer = await Transaction.findBy({payment:"TRANSFER"})
         const payment = await Transaction.aggregate([
             {$group:{
                 "_id": "$payment",
@@ -101,15 +98,16 @@ export const payment = async (req,res,next) =>{
 }
 
 
+
 export const monthStats = async (req,res,next) =>{
     try {
         const date = new Date()
-        const lastMonth = date.getDay(date.getDay())
+        const lastMonth = new Date(date.setMonth(date.getMonth() -1))
         const stats = await Transaction.aggregate([
             {"$match": {"createdAt":lastMonth}},
-            // {"$project": {"$productName":1}}
+            {"$project": {"productName":1}}
         ])
-        res.json(stats)
+        res.json({lastMonth,stats})
     } catch (err) {
         next(err)
     }
@@ -136,9 +134,17 @@ export const todayStats = async (req,res,next) =>{
         const date = new Date()
         const today = new Date(date.setDate(date.getDate()))
         const stats = await Transaction.aggregate([
-            {'$match':{'createdAt':{'$lte': today}}}
-        ])
-        res.json(stats)
+            {'$match':{createdAt:{'$lte': today}}},
+            {"$project": {
+                month: {$month: '$createdAt'},
+        }},
+        {"$group":{
+            _id: '$month',
+            amount:{$sum:1}
+        }},
+        {"$project": {productName:1}}
+        ]) 
+        res.json({stats,today})
     } catch (err) {
         next(err)
     }

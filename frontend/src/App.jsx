@@ -9,12 +9,12 @@ import Sale from './pages/Sale'
 import Stats from './pages/Stats'
 import Transactions from './pages/Transactions'
 import ManageEmployers from './pages/ManageEmployers'
+import PaymentStats from './pages/PaymentStats'
 
 
 function App() {
   return (
     <Router>
-      {/* <Header /> */}
       <Routes>
         <Route path='/' exact element={<Home />}  />
         <Route path='/Admin' exact element={<Admin />}  />
@@ -25,6 +25,7 @@ function App() {
         <Route path='/sale' element={<Sale />} />
         <Route path='/print' element={<Print />} />
         <Route path='/manage-employers' element={<ManageEmployers />} />
+        <Route path='/payment-stats' element={<PaymentStats />} />
       </Routes>
     </Router>
   )

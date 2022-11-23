@@ -56,7 +56,7 @@ export default function ManageEmployers() {
           {error && <div className='border-2 border-red-600  bg-red-600  capitalize text-white p-2'>{error}</div>}
           <Input label='username' labelText='username' type='text' name='username' id='username' value={username} state={(e => setUsername(e.target.value))} />
           <Input label='password' labelText='password' type='password' name='password' id='password' value={password} state={(e => setPassword(e.target.value))} />
-          <Input label='reapeat-password' labelText='repeat-password' type='password' name='password' value={repeatPassword} id='password' state={(e => setRepeatPassword(e.target.value))} />
+          <Input label='reapeat-password' labelText='repeat-password' type='password' name='password' value={repeatPassword} id='repeatPassword' state={(e => setRepeatPassword(e.target.value))} />
           <Button text='add user' />
         </form>
         </div>

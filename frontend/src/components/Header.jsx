@@ -8,9 +8,9 @@ export default function Header({text}) {
         <img src={logo} alt="logo" className='w-[4%]' />
       </Link>
       </div>
-      <div className='flex items-center gap-5'>
-        <p className='bg-white px-4'>{text}</p>
-      </div>
+      <Link to='/'>
+        <button className=' p-1 bg-white text-black capitalize hover:bg-gray-600 hover:text-white'>log out</button>
+      </Link>
     </div>
   );
 }
