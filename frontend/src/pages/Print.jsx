@@ -18,9 +18,14 @@ export default function Print({prints}) {
     <div className='text-center'>
     <h2 className='font-bold text-xl my-2 '>alin dabaga investment</h2>
     {/* <p>dealers in all kind of textiles and materials such as: swiss lace, yards, cahsmerem geekay yards, atamfa, shadda, laces, etc</p> */}
-    <p className='mb-3'>
-      <span className='font-bold'>address: </span>
+    <p className='mt-3'>
+      <span className='font-bold'></span>
       <span>shop no. 17 kwari market filin parking 'yan tebuta mall, opp, mawaffaq global impulse</span>
+    </p>
+    <p>
+      <span className='font-bold'> </span>
+      <span>08022675715, </span>
+      <span>09065714523</span>
     </p>
     <div className='flex gap-3 justify-center'>
     <p>

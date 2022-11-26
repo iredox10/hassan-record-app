@@ -1,18 +1,19 @@
 import { useState,useEffect } from "react"
 import axios from 'axios'
+import useSwr from 'swr'
 import { useMemo } from "react"
 import { useCallback } from "react"
 
 const useFetch = (url) =>{
     const [data, setData] = useState()
     const [err, setErr] = useState()
-
+    
     const fn = useCallback(()=>{
         const fetch = async () =>{
             try{
                 const res = await axios(url)
                 setData(res.data)
-                // console.log('rnni')
+                console.log(res.data)
             }catch(err){
                 setErr(err)
                 console.log(err)
@@ -23,8 +24,8 @@ const useFetch = (url) =>{
 
     useEffect(()=>{
         fn()
-        return () => fn()
-    },[url,data])
+        // return () => fn()
+    },[url])
     return {data,err}
 }
 
