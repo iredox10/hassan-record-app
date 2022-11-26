@@ -5,9 +5,19 @@ import { useNavigate, useParams } from "react-router-dom"
 import Header from "../components/Header"
 import PTag from "../components/PTag"
 import useFectch from "../hooks/useFetch"
-export default function Product() {
-    const {id} = useParams()
-    const {data,err} = useFectch('http://localhost:4000/view-product/'+id)
+import {useQuery} from 'react-query';
+
+	// Fetcher function
+  
+  export default function Product() {
+  const {id} = useParams()
+	const getFacts = async () => {
+		const res = await fetch('http://localhost:4000/view-product/'+id);
+		return res.json();
+	};
+	// Using the hook
+	const {data, err,} = useQuery('products', getFacts,{refetchInterval: 1000});
+    // const {data,err} = useFectch('http://localhost:4000/view-product/'+id)
     const navigate = useNavigate()
     const [model, setModel] = useState(false)
 

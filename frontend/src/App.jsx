@@ -1,5 +1,5 @@
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
-import Header from './components/Header'
+import {QueryClient, QueryClientProvider} from 'react-query';
 import Home from './pages/Home'
 import Admin from './pages/Admin'
 import Print from './pages/Print'
@@ -11,9 +11,12 @@ import Transactions from './pages/Transactions'
 import ManageEmployers from './pages/ManageEmployers'
 import PaymentStats from './pages/PaymentStats'
 
+// Initialze the client
+const queryClient = new QueryClient();
 
 function App() {
   return (
+		<QueryClientProvider client={queryClient}>
     <Router>
       <Routes>
         <Route path='/' exact element={<Home />}  />
@@ -28,6 +31,8 @@ function App() {
         <Route path='/payment-stats' element={<PaymentStats />} />
       </Routes>
     </Router>
+		</QueryClientProvider>
+
   )
 }
 

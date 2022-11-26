@@ -1,7 +1,6 @@
 import { useState,useEffect } from "react"
 import axios from 'axios'
-import useSwr from 'swr'
-import { useMemo } from "react"
+import {QueryClient, QueryClientProvider} from 'react-query'; 
 import { useCallback } from "react"
 
 const useFetch = (url) =>{
