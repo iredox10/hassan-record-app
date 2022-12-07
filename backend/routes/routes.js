@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { Router } from 'express'
 import * as controller from '../controllers/controllers.js'
 const route = express.Router()
 
@@ -18,7 +18,17 @@ route.get('/transactions', controller.transactions)
 
 route.get('/payment-method', controller.payment)
 
-route.get('/last-month-stats', controller.monthStats)
-
 route.get('/today-stats', controller.todayStats)
+
+route.get('/lastweek-stats', controller.lastWeek)
+
+route.get('/total', controller.totalShopAmount)
+
+route.get('/transc',controller.transc)
+
+route.get('/monthly-stats', controller.monthlyStats)
+
+route.get('/daily-stats', controller.dailyStats)
+
+route.get('/yesterday-stats', controller.yesterdayStats)
 export default route

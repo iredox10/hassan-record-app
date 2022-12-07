@@ -97,58 +97,141 @@ export const payment = async (req,res,next) =>{
     }
 }
 
-
-
-export const monthStats = async (req,res,next) =>{
+// stats
+export const totalShopAmount = async (req,res,next) => {
     try {
-        const date = new Date()
-        const lastMonth = new Date(date.setMonth(date.getMonth() -1))
-        const stats = await Transaction.aggregate([
-            {"$match": {"createdAt":lastMonth}},
-            {"$project": {"productName":1}}
+        const totalAmount = await Product.aggregate([
+            {"$project": {amount: {$sum:"$amount"}}}
         ])
-        res.json({lastMonth,stats})
+        res.json(totalAmount)
     } catch (err) {
-        next(err)
+        res.json(err)
     }
-
-}
-
-export const yesterdayStats = async (req,res,next) =>{
-    try {
-        const date = new Date()
-        const yesterday = new Date(date.setDate(date.getDate() -1))
-        const stats = await Transaction.aggregate([
-            {"$match": {"createdAt":yesterday}},
-            // {"$project": {"$productName":1}}
-        ])
-        res.json(stats)
-    } catch (err) {
-        next(err)
-    }
-
 }
 
 export const todayStats = async (req,res,next) =>{
     try {
         const date = new Date()
+        const yesterday = new Date(date.setDate(date.getDate() -1))
+    
         const today = new Date(date.setDate(date.getDate()))
-        const stats = await Transaction.aggregate([
-            {'$match':{createdAt:{'$lte': today}}},
+        
+        const todayProducts = await Transaction.find({createdAt:{$gt: yesterday}})
+
+        const total =  await Transaction.aggregate([
+            {'$match':{createdAt:{'$gt': yesterday}}},
             {"$project": {
-                month: {$month: '$createdAt'},
+
+                productName:'$productName',
+                amount:'$amount',
         }},
-        {"$group":{
-            _id: '$month',
-            amount:{$sum:1}
+        {$group:{
+            _id: '$productName',
+            total: {$sum:'$amount'}
         }},
-        {"$project": {productName:1}}
+        {$sort: {total:-1}}
         ]) 
-        res.json({stats,today})
+        res.json({total,todayProducts})
     } catch (err) {
         next(err)
     }
-
 }
 
+// todo: make the yesterday stats.
+// having the problem of returning the docs for yesterday and today
+// I just want it to be returning only for today's transactions
+export const yesterdayStats = async (req,res,next) =>{
+    const date = new Date()
+    const yesterday = new Date(date.setDate(date.getDate() -2))
+    const today = new Date()
 
+    try {
+        const yesterdayProducts = await Transaction.find({createdAt:{$gt:yesterday,$lt:today}})
+
+        // const total =  await Transaction.aggregate([
+        //     {'$match':{createdAt:{'$gt': yesterday}}},
+        //     {"$project": {
+        //         productName:'$productName',
+        //         amount:'$amount',
+        // }},
+        // {$group:{
+        //     _id: '$productName',
+        //     total: {$sum:'$amount'}
+        // }},
+        // {$sort: {total:-1}}
+        // ]) 
+        // res.json({today,yesterday,date})
+        res.json({date,yesterday,today,yesterdayProducts})
+    } catch (err) {
+        res.json(err)
+    }
+}
+
+export const lastWeek = async (req,res,next) =>{
+    try {
+        const date = new Date()
+        const lastWeek = new Date(date.setDate(date.getDate() -7))
+        const stats = await Transaction.aggregate([
+            {'$match':{createdAt:{'$lte': lastWeek}}},
+            {"$project": {
+                month: {$month: '$createdAt'},
+                amount:'$amount'
+        }},
+        {"$group":{
+            _id: '$month',
+            amount:{$sum:"$amount"}
+        }}
+        ]) 
+        res.json({stats,lastWeek})
+    } catch (err) {
+        next(err)
+    }
+}
+
+export const monthlyStats = async (req,res,next) =>{
+    const date = new Date()
+    const lastYear = new Date(date.setFullYear(date.getFullYear() -1))
+    try{
+        const stats = await Transaction.aggregate([
+            {$match: {createdAt:{$gt:lastYear}}},
+            {$project: {month:{$month:'$createdAt'}, amount:"$amount"}},
+            {$group: {
+                _id: "$month",
+                totalSale: {$sum: '$amount'}
+            }}
+        ])  
+        res.json({stats})
+    }catch(err){
+        res.json(err)
+    }
+}
+
+export const dailyStats = async (req,res,next) =>{
+    const date = new Date()
+    const day = date.getDate()
+    const thisMonth = new Date(date.setDate(date.getDate() - day))
+    try{
+        const stats = await Transaction.aggregate([
+            {$match: {createdAt:{$gt:date}}},
+            {$project: {date: {$dayOfMonth:'$createdAt'}, amount:'$amount', productName:'$productName'}},
+            {$group:{
+                _id: '$date',
+                amount: {$sum:"$amount"}
+            }}
+        ])
+        res.json({date,stats,thisMonth})
+    }catch(err){
+        res.json(err)
+    }
+}
+
+export const transc = async (req,res,next)=>{
+    try {
+        const t = await Product.aggregate([
+            {$project : {transanctions:1}}
+        ])
+        res.json(t)
+    } catch (err) {
+        
+    }
+}

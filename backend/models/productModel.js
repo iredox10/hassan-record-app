@@ -21,6 +21,7 @@ const product = new mongoose.Schema({
     transactions:Array
 
 },{timestamps:true})
+
 product.pre('save', function(){
     if(this.pieces == 0){
         this.pieces = 0
