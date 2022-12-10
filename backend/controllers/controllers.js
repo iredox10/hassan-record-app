@@ -1,3 +1,4 @@
+import { Borrow } from '../models/borrowModel.js'
 import {Product} from '../models/productModel.js'
 import {Transaction} from '../models/transactionModel.js'
 
@@ -216,10 +217,10 @@ export const dailyStats = async (req,res,next) =>{
             {$project: {date: {$dayOfMonth:'$createdAt'}, amount:'$amount', productName:'$productName'}},
             {$group:{
                 _id: '$date',
-                amount: {$sum:"$amount"}
+                totalSale: {$sum:"$amount"}
             }}
         ])
-        res.json({date,stats,thisMonth})
+        res.json({stats})
     }catch(err){
         res.json(err)
     }
@@ -233,5 +234,26 @@ export const transc = async (req,res,next)=>{
         res.json(t)
     } catch (err) {
         
+    }
+}
+
+
+//! borrow controller 
+
+export const borrow = async (req,res,next) =>{
+    try{
+        const borrow = await Borrow.insertMany(req.body)
+        res.json(borrow)
+    }catch(err){
+        res.json(err)
+    }
+}
+
+export const get_borrow = async(req,res,next) =>{
+    try{
+        const borrows = await Borrows.find()
+        res.json(borrows)
+    }catch(err){
+        res.json(err)
     }
 }

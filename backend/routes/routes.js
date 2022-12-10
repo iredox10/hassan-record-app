@@ -31,4 +31,8 @@ route.get('/monthly-stats', controller.monthlyStats)
 route.get('/daily-stats', controller.dailyStats)
 
 route.get('/yesterday-stats', controller.yesterdayStats)
+
+route.post('/borrow', controller.borrow)
+
+route.get('/view-borrows', controller.get_borrow)
 export default route

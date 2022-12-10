@@ -18,7 +18,8 @@ const product = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    transactions:Array
+    transactions:Array,
+    borrow: Array
 
 },{timestamps:true})
 
