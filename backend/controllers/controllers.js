@@ -60,7 +60,7 @@ export const sale = async (req,res,next) =>{
             .then(r => res.json())
             .catch(err => console.log(err))
         })
-        res.json(transaction)
+        res.json({transaction,product})
     }catch(err){
        next(err)
     }
@@ -243,16 +243,54 @@ export const transc = async (req,res,next)=>{
 export const borrow = async (req,res,next) =>{
     try{
         const borrow = await Borrow.insertMany(req.body)
-        res.json(borrow)
+        const body = req.body
+        const p = borrow.map(p =>{
+            const borrowedProduct = p
+            const quantity = p.quantity
+            const product = p.product
+            const products = Product.updateMany({productName:product},
+                {$inc:{pieces: -quantity}, $push:{borrowed:borrowedProduct}})
+                .then(r => res.json())
+                .catch(err => res.json(err))
+            })
+
+        res.json({borrow,p})
     }catch(err){
         res.json(err)
     }
 }
 
-export const get_borrow = async(req,res,next) =>{
+export const get_borrows = async (req,res,next) =>{
     try{
-        const borrows = await Borrows.find()
+        const borrows = await Borrow.find()
         res.json(borrows)
+    }catch(err){
+        res.json(err)
+    }
+}
+
+export const borrowStats = async (req,res,next) =>{
+    const date = new Date()
+    const day = date.getDate()
+    const thisMonth = new Date(date.setDate(date.getDate() - day))
+    try{
+        const stats = await Borrow.aggregate([
+            {$match: {createdAt:{$gt:date}}},
+            {$project: {date: {$dayOfMonth:'$createdAt'}, amount:'$amount', product:'$product',collector:'$collectorName', amount:'$amount',dateCollected:'$createdAt'}},
+            {$group:{
+                _id: '$date',
+                total: {$sum:"$amount"},
+                product:{
+                    $push:{
+                        collector:'$collector',
+                        product:'$product',
+                        amount:'$amount',
+                        collectedOn:'$dateCollected',
+                    }
+                }
+            }},
+        ])
+        res.json({stats})
     }catch(err){
         res.json(err)
     }

@@ -12,8 +12,8 @@ const borrowSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    price: {
-        type: String,
+    amount: {
+        type: Number,
         required: true,
     },
 },{timestamps: true})

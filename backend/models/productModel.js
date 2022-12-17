@@ -19,7 +19,7 @@ const product = new mongoose.Schema({
         required: true,
     },
     transactions:Array,
-    borrow: Array
+    borrowed: Array
 
 },{timestamps:true})
 
