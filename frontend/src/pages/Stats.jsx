@@ -8,17 +8,17 @@ export default function Stats() {
     <>
     <Header />
     <div className='flex gap-2 justify-center'>
-        <Link to='/last-month-stats'>
-        <Button text="last month" />
+        <Link to='/monthly-stats'>
+        <Button text="monthly stats"/>
         </Link>
-        <Link to='/yesterday-stats'>
-        <Button text="yesterday" />
+        <Link to='/daily-stats'>
+        <Button text="daily stats"/>
         </Link>
-        <Link to='/last-week-stats'>
-        <Button text="last week" />
+        <Link to='/today-stats'>
+        <Button text="today stats"/>
         </Link>
         <Link to='/payment-stats'>
-        <Button text="payment stats" />
+        <Button text="payment stats"/>
         </Link>
     </div>
     </>

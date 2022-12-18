@@ -1,6 +1,5 @@
 import { useState,useEffect } from "react"
 import axios from 'axios'
-import {QueryClient, QueryClientProvider} from 'react-query'; 
 import { useCallback } from "react"
 
 const useFetch = (url) =>{

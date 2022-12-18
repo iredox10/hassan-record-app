@@ -10,6 +10,11 @@ import Stats from './pages/Stats'
 import Transactions from './pages/Transactions'
 import ManageEmployers from './pages/ManageEmployers'
 import PaymentStats from './pages/PaymentStats'
+import MonthlyStats from './pages/MonthlyStats';
+import DailyStats from './pages/DailyStats';
+import Borrow from './pages/Borrow';
+import BorrowPage from './pages/BorrowPage';
+import BorrowStats from './pages/BorrowStats';
 
 // Initialze the client
 const queryClient = new QueryClient();
@@ -29,6 +34,13 @@ function App() {
         <Route path='/print' element={<Print />} />
         <Route path='/manage-employers' element={<ManageEmployers />} />
         <Route path='/payment-stats' element={<PaymentStats />} />
+        <Route path='/monthly-stats' element={<MonthlyStats />} />
+        <Route path='/daily-stats' element={<DailyStats />} /> 
+        <Route path='/borrow'>
+          <Route index element={<BorrowPage />}></Route>
+        <Route path='/borrow/add-borrow' element={<Borrow />} /> 
+        <Route path='/borrow/borrow-stats' element={<BorrowStats/>} />
+        </Route>
       </Routes>
     </Router>
 		</QueryClientProvider>

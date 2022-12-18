@@ -21,10 +21,13 @@ export default function Home() {
           <Button text="sale page" />
         </Link>
         <Link to="/stats">
-          <Button text="stats" />
+          <Button text="stats" /> 
         </Link>
         <Link to="/manage-employers">
           <Button text="manage employer" />
+        </Link>
+        <Link to="/borrow">
+          <Button text="borrow page" />
         </Link>
       </div>
     </>

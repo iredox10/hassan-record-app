@@ -42,7 +42,7 @@ export default function Sale() {
       try{
           const res = await axios.post("http://localhost:4000/sale",selectedProducts);
           console.log(res.data)
-          navigate('/print', {state:{transactions: res.data, user: user.username}})
+          navigate('/print', {state:{transactions: res.data.transaction, user: user.username}})
       }catch(err){
         console.log(err)
       }

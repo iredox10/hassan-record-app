@@ -14,6 +14,7 @@ export default function PaymentStats() {
     // const { data, err } = useFetch(
     //     "http://localhost:4000/payment-method"
     //   );
+    console.log(data)
   return (
     <div>
         <Header />

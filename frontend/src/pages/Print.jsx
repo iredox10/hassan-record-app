@@ -9,6 +9,7 @@ export default function Print({prints}) {
   const total = transactions.reduce((acc,value) =>{
     return acc + value.amount
   }, 0)
+  console.log(transactions)
   return (
     <>
     <div className='border-2 rounded-md mt-2 m-auto md:w-[30%]  p-2 print:p-2 capitalize'>
@@ -17,10 +18,10 @@ export default function Print({prints}) {
     </div>
     <div className='text-center'>
     <h2 className='font-bold text-xl my-2 '>alin dabaga investment</h2>
-    {/* <p>dealers in all kind of textiles and materials such as: swiss lace, yards, cahsmerem geekay yards, atamfa, shadda, laces, etc</p> */}
+    
     <p className='mt-3'>
       <span className='font-bold'></span>
-      <span>shop no. 17 kwari market filin parking 'yan tebuta mall, opp, mawaffaq global impulse</span>
+      <span>shop no. 17 kwari market filin parking 'yan tebura mall, opp, mawaffaq global impulse</span>
     </p>
     <p>
       <span className='font-bold'> </span>
