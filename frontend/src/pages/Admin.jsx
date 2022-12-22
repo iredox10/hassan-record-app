@@ -7,11 +7,11 @@ import { Route } from "react-router-dom";
 
 export default function Home() {
   const { data, err } = useFectch("http://localhost:4000/view-products");
-  const {state} =useLocation()
-  const {user} = state
+  // const {state} =useLocation()
+  // const {user} = state
   return (
     <>
-    <Header text={`${user.username}`} />
+    <Header />
     
       <div className='p-5 flex gap-4 justify-center'>
         <Link to="/products">

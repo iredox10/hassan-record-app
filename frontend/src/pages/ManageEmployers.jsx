@@ -3,6 +3,7 @@ import React from 'react'
 import { useState } from 'react'
 import Button from '../components/Button'
 import Header from '../components/Header'
+import HeadText from '../components/HeadText'
 import Input from '../components/Input'
 import PTag from '../components/PTag'
 import useFetch from '../hooks/useFetch'
@@ -41,13 +42,17 @@ export default function ManageEmployers() {
   return (
     <div>
         <Header />
-        <h1>list of employers</h1>
-        <div className='flex p-5' >
-          <div className='flex-1'>
+        <HeadText text='list of employees' />
+        <div className='md:flex p-5' >
+          <div className='flex-1 flex gap-10 flex-wrap'>
         {employers && employers.map(e =>(
           <div>
             <PTag span='username' text={e.username} />
-            <Button text='view transactions' />
+            <PTag span='assigned password' text={e.password} />
+            <div className='flex gap-3'>
+            <button className="font-bold capitalize p-2 md:p-4  shadow-sm shadow-green-500  mt-4 hover:bg-gray-500 ">view transactions</button>
+            <Button text='delete user' />
+            </div>
           </div>
         ))}
         </div>

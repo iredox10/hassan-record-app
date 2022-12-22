@@ -1,11 +1,14 @@
 import axios from "axios";
 import React, {useState } from "react";
 import {useLocation, useNavigate} from 'react-router-dom'
+import { AuthContext } from "../../context/AuthContext";
 import Form from "../components/Form";
 import Header from "../components/Header";
 import HeadText from "../components/HeadText";
 import PTag from "../components/PTag";
+import { useAuthContext } from "../hooks/UseAuthContext";
 import useFetch from "../hooks/useFetch";
+
 
 export default function Sale() {
   const navigate = useNavigate()
@@ -13,8 +16,8 @@ export default function Sale() {
     "http://localhost:4000/view-products"
   );
   
-  const {state} = useLocation()
-  const {user} = state
+  // const {state} = useLocation()
+  // const {user} = state
 
   const [selectedProducts, setSelectedProducts] = useState([])
   const [productName, setProductName] = useState(null)
@@ -24,6 +27,7 @@ export default function Sale() {
   const [employer, setEmployer] = useState('')
   const [error,setError] = useState('')
   const [remove, setRemove] = useState(false)
+  const {user,dispatch} = useAuthContext(AuthContext)
 
   const AddToArray = (e) =>{
     e.preventDefault()
@@ -42,21 +46,26 @@ export default function Sale() {
       try{
           const res = await axios.post("http://localhost:4000/sale",selectedProducts);
           console.log(res.data)
-          navigate('/print', {state:{transactions: res.data.transaction, user: user.username}})
+          navigate('/print', {state:{transactions: res.data.transaction, user: user.user.username}})
       }catch(err){
         console.log(err)
       }
   }
 
-  const handleRemove = (e) =>{
-    e.preventDefault()
-    const p = selectedProducts.filter()
-    console.log(e)
+  const handleLogout = ()=>{
+    dispatch({type:'LOGOUT'})
   }
 
+  const handleRemove = (e) =>{
+    e.preventDefault()
+    // const selectedProducts = selectedProducts.filter(p => p =! e.target.value)
+    console.log(e)
+  }
+  let activeUser
+ user ? activeUser = user.user.username : activeUser = ''
   return (
     <div>
-      <Header text={`welcome ${user.username}`}/>
+      <Header user={activeUser} action={handleLogout}/>
         <div>
       <div className="px-5 capitalize font-bold text-2xl"></div>
           <div className="flex justify-between items-center w-[80%] p-5">
@@ -71,7 +80,7 @@ export default function Sale() {
                 setQuantity={setQuantity}
                 setAmount={setAmount}
                 setPayment={setPayment}
-                user = {user.username}
+                user = {activeUser}
                 setEmployer={setEmployer}
                 AddToArray={AddToArray}
               />

@@ -12,6 +12,7 @@ export default function Stats() {
         <Button text="monthly stats"/>
         </Link>
         <Link to='/daily-stats'>
+          
         <Button text="daily stats"/>
         </Link>
         <Link to='/today-stats'>

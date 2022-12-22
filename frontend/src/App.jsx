@@ -15,9 +15,14 @@ import DailyStats from './pages/DailyStats';
 import Borrow from './pages/Borrow';
 import BorrowPage from './pages/BorrowPage';
 import BorrowStats from './pages/BorrowStats';
+import { useContext } from 'react';
+import { useAuthContext } from './hooks/UseAuthContext';
 
 // Initialze the client
 const queryClient = new QueryClient();
+
+// const {user} = useAuthContext(useContext)
+
 
 function App() {
   return (
