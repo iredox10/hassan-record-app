@@ -6,6 +6,8 @@ import Header from "../components/Header";
 import HeadText from "../components/HeadText";
 import PTag from "../components/PTag";
 import useFetch from "../hooks/useFetch";
+import {Fa500Px, FaCross, FaExclamationCircle, FaTwitter} from 'react-icons/fa'
+import ErrorPrompt from "../components/ErrorPrompt";
 
 export default function Borrow() {
   const navigate = useNavigate()
@@ -66,39 +68,39 @@ export default function Borrow() {
           <div className="flex justify-between items-center w-[80%] p-5">
             <HeadText text="borrow page" />
           </div>
-          {error && <div className="text-red-600">{error} </div>}
+          {error && <ErrorPrompt error={error} />}
           <div className="flex px-5 ">
             <div className="flex-1 pr-4 border-r-4 border-red-600">
-              <form  className="capitalize">
+              <form  className="capitalize ">
                 <div className="flex gap-10">
-                <div className="flex flex-col">
+                <div className="flex flex-col w-[100%]">
                   <label htmlFor="collectorName">collectorName</label>
-                  <input type="text" required name="collectorName" className="border-2" value={collectorName} onChange={(e)=> setCollectorName(e.target.value)}  />
+                  <input type="text" required name="collectorName" className="border-2 w-full" value={collectorName} onChange={(e)=> setCollectorName(e.target.value)}  />
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col w-[100%]">
                   <label htmlFor="productName">productName</label>
-                  <input type="text" required name="productName" className="border-2" value={product} onChange={(e)=> setProduct(e.target.value)} />
+                  <input type="text" required name="productName" className="border-2 w-full" value={product} onChange={(e)=> setProduct(e.target.value)} />
                 </div>
 
                 </div>
-                <div className="flex gap-10">
-                <div className="flex flex-col">
+                <div className="flex gap-10 ">
+                <div className="flex flex-col w-[100%]">
                   <label htmlFor="quantity">quantity</label>
-                  <input type="number" required name="quantity" className="border-2" value={quantity}  onChange={(e)=> setQuantity(e.target.value)} />
+                  <input type="number" required name="quantity" className="border-2 w-full" value={quantity}  onChange={(e)=> setQuantity(e.target.value)} />
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col w-[100%]">
                   <label htmlFor="amount">amount</label>
-                  <input type="number" required name="amount" className="border-2" value={amount} onChange={(e)=> setAmount(e.target.value)} />
+                  <input type="number" required name="amount" className="border-2 w-full" value={amount} onChange={(e)=> setAmount(e.target.value)} />
                 </div>
                 </div>
-                <button onClick={AddToArray}>add to list</button>
+                <button className="font-bold capitalize p-2 md:p-4 bg-red-600 shadow-lg  text-white mt-4 hover:bg-gray-500"  onClick={AddToArray}>add to list</button>
               </form>
             </div>
             <div className="pl-4 max-w-[50%]">
               <form onSubmit={handleSubmit} className='flex  flex-wrap gap-6 '>
                 <div className="flex flex-wrap gap-5  ">
                 {selectedProducts && selectedProducts.length <= 0 ? (
-                  <div className="capitalize flex font-bold">no product to sale</div>
+                  <div className="capitalize flex font-bold">no product added</div>
                 ) :(selectedProducts.map((sp, i) => (
                     <div key={i} className="shadow-md p-3">
                       <PTag span="collector name" text={sp.collectorName} />

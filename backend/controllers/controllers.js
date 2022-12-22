@@ -14,9 +14,6 @@ export const add_product = async (req,res,next) =>{
         res.json(err)
     }
 }
-export const test = async (req,res,next) =>{
-    next()
-}
 export const view_products = async (req,res) =>{
     try{
         const products = await Product.find()
@@ -41,6 +38,16 @@ export const delete_product = async (req,res) =>{
         res.status(200).json(product)
     }catch(err){
         res.status(500).json(err)
+    }
+}
+
+export const edit_product = async (req,res,next) =>{
+    try {
+        const product = await Product.findByIdAndUpdate(res.params.id,{...req.body
+        },{new:true})
+        res.json(product)
+    } catch (err) {
+        res.json(err)
     }
 }
 
@@ -218,7 +225,8 @@ export const dailyStats = async (req,res,next) =>{
             {$group:{
                 _id: '$date',
                 totalSale: {$sum:"$amount"}
-            }}
+            }},
+            {$sort: {_id:-1}}
         ])
         res.json({stats})
     }catch(err){
@@ -262,7 +270,7 @@ export const borrow = async (req,res,next) =>{
 
 export const get_borrows = async (req,res,next) =>{
     try{
-        const borrows = await Borrow.find()
+        const borrows = await Borrow.find().sort({createdAt: -1})
         res.json(borrows)
     }catch(err){
         res.json(err)
@@ -280,15 +288,16 @@ export const borrowStats = async (req,res,next) =>{
             {$group:{
                 _id: '$date',
                 total: {$sum:"$amount"},
-                product:{
+                products:{
                     $push:{
                         collector:'$collector',
                         product:'$product',
                         amount:'$amount',
                         collectedOn:'$dateCollected',
                     }
-                }
+                },
             }},
+            {$sort: {_id:-1}}
         ])
         res.json({stats})
     }catch(err){

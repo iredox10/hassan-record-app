@@ -9,7 +9,8 @@ export default function BorrowPage() {
       <Header />
       <div className='md:flex justify-center gap-5'>
       <Link to='/borrow/add-borrow'><Button text='add borrow' /></Link>
-        <Link to='/borrow/borrow-stats'><Button text='borrow-stats' /> </Link>
+        <Link to='/borrow/borrow-stats'><Button text='this month borrow stats' /> </Link>
+      <Link to='/borrow/borrow-history'><Button text='borrow history' /> </Link>
         </div>
     </div>
   )

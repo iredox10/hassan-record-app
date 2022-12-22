@@ -16,8 +16,6 @@ export default function Sale() {
     "http://localhost:4000/view-products"
   );
   
-  // const {state} = useLocation()
-  // const {user} = state
 
   const [selectedProducts, setSelectedProducts] = useState([])
   const [productName, setProductName] = useState(null)

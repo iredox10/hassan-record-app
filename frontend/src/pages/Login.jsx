@@ -16,24 +16,20 @@ export default function Login() {
 
   const handleSubmit = async (e)=>{
     e.preventDefault()  
-    const res = await axios.post('http://localhost:4000/login',{username,password})
-    const user= res.data
-    if(!res.status == 200) console.log('error')
-    localStorage.setItem('user',JSON.stringify(res.data))
-    dispatch({type:'LOGIN',payload: user})
     try {
+      const res = await axios.post('http://localhost:4000/login',{username,password})
+      const user= res.data
+      if(!res.status == 200) console.log('error')
+      localStorage.setItem('user',JSON.stringify(res.data))
+      dispatch({type:'LOGIN',payload: user})
        if(res.data.user.isAdmin){
         navigate('/admin')
-        // navigate('/admin',{state:{user:res.data.user}})
        }else{
          navigate('/sale')
-         // navigate('/sale',{state:{user:res.data.user}})
        }
        
     } catch (err) {
-      // console.log(err.response.data.err)
-      // setErr(err.response.data.err)
-      console.log(err)
+      setErr(err.response.data.err)
     }
   }
   return (

@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import useFectch from "../hooks/useFetch";
 import {Link, useLocation} from 'react-router-dom'
 import { Route } from "react-router-dom";
+import { FaArrowDown, FaProductHunt } from "react-icons/fa";
 
 export default function Home() {
   const { data, err } = useFectch("http://localhost:4000/view-products");

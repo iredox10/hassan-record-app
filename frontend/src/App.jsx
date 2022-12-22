@@ -17,6 +17,7 @@ import BorrowPage from './pages/BorrowPage';
 import BorrowStats from './pages/BorrowStats';
 import { useContext } from 'react';
 import { useAuthContext } from './hooks/UseAuthContext';
+import BorrowHistory from './pages/BorrowHistory';
 
 // Initialze the client
 const queryClient = new QueryClient();
@@ -45,6 +46,7 @@ function App() {
           <Route index element={<BorrowPage />}></Route>
         <Route path='/borrow/add-borrow' element={<Borrow />} /> 
         <Route path='/borrow/borrow-stats' element={<BorrowStats/>} />
+        <Route path='/borrow/borrow-history' element={<BorrowHistory/>} />
         </Route>
       </Routes>
     </Router>
