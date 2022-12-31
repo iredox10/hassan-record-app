@@ -29,7 +29,7 @@ export default function Sale() {
 
   const AddToArray = (e) =>{
     e.preventDefault()
-    if(productName == null || quantity == null || amount == null || payment == null ) {
+    if(productName === null || quantity === null || amount === null || payment === null ) {
       setError('please fill all the field')
       return
     }else{
