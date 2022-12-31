@@ -25,7 +25,7 @@ export default function Borrow() {
   const [successfull, setsuccessfull] = useState(false)
   const AddToArray = (e) =>{
     e.preventDefault()
-    if(collectorName == null || quantity == null || amount == null || product == null ) {
+    if(collectorName === null || quantity === null || amount === null || product === null ) {
       setError('please fill all the field')
       return
     }else{
